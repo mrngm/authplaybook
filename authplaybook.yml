@@ -1,0 +1,12 @@
+# vim: et:sw=2:ts=2:
+---
+
+- name: deploy authorized keys
+  hosts: all
+  sudo: true
+  # remote_user: userY
+  vars_files:
+    - "vars.yml"
+
+  roles:
+    - logins

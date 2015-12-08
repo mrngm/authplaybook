@@ -1,0 +1,13 @@
+# vim: et:ts=2:sw=2:
+---
+
+# - name: add users
+#   user: name={{ item.name }} state=present groups={{ item.groups }} shell={{ item.shell }} password={{ item.password }} update_password=on_create
+#   with_items: "{{ users }}"
+#   when: "'{{ ansible_fqdn }}' in '{{ item.hosts }}'"
+
+- name: add public keys
+  authorized_key: user={{ item.name }} key="{{ item.ssh_pubkey }}" state=present exclusive=yes
+  with_items: "{{ users }}"
+  when: "'{{ ansible_fqdn }}' in '{{ item.hosts }}'"
+
